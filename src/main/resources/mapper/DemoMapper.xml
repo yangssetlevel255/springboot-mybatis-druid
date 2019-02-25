@@ -4,8 +4,8 @@
 <mapper namespace="com.dhu.love.project.mapper.DemoMapper">
 
     <!-- 查询你的爱 -->
-    <select id="searchLove" resultMap="java.lang.Math" parameterType="String">
-        select * from userinfo where info_id=#{param}
+    <select id="searchLove" resultType="java.util.Map" parameterType="String">
+        select * from user_info where user_id=#{userId}
     </select>
 
 </mapper>

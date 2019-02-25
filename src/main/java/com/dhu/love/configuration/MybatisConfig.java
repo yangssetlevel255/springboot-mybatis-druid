@@ -13,8 +13,8 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 import java.io.IOException;
 
-@Configuration
-@AutoConfigureAfter(name="DataSource")
+//@Configuration
+//@AutoConfigureAfter(name="DataSource")
 public class MybatisConfig {
 
     @Bean(name="sqlSessionFactory")
@@ -23,7 +23,7 @@ public class MybatisConfig {
         SqlSessionFactory sqlSessionFactory=null;
         try {
             sqlSessionFactoryBean.setDataSource(dataSource);
-            sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/*.xml"));
+            sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

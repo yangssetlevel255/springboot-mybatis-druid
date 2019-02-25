@@ -2,12 +2,15 @@ package com.dhu.love.configuration;
 
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.alibaba.druid.util.JdbcConstants;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -75,6 +78,8 @@ public class DruidConfig {
     private int maxPoolPreparedStatementPerConnectionSize;
 
     @Bean(name="DataSource")
+    @ConditionalOnMissingBean
+
     public DataSource getDataSource() throws SQLException {
         DruidDataSource dataSource =new DruidDataSource();
         dataSource.setDriverClassName(driverClassName);
@@ -94,7 +99,7 @@ public class DruidConfig {
         dataSource.setTestOnReturn(testOnReturn);
         dataSource.setPoolPreparedStatements(poolPreparedStatements);
         dataSource.setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize);
-        dataSource.setKeepAlive(true);
+        //dataSource.setKeepAlive(true);
         List<Filter> filterList=new ArrayList();
         filterList.add(getWallFilter());
         dataSource.setProxyFilters(filterList);
@@ -139,9 +144,9 @@ public class DruidConfig {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public ServletRegistrationBean druidServlet(){
-        ServletRegistrationBean servletRegistrationBean =new ServletRegistrationBean();
-        servletRegistrationBean.addUrlMappings("/druid/*");
+        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
         servletRegistrationBean.addInitParameter("loginUsername",environment.getProperty("spring.datasource.druid.username"));
         servletRegistrationBean.addInitParameter("loginPassword",environment.getProperty("spring.datasource.druid.password"));
         servletRegistrationBean.addInitParameter("logSlowSql",environment.getProperty("spring.datasource.druid.logSlowSql"));
@@ -150,11 +155,12 @@ public class DruidConfig {
 
     @Bean
     public FilterRegistrationBean filterRegistrationBean(){
-        FilterRegistrationBean filterRegistrationBean =new FilterRegistrationBean();
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new WebStatFilter());
         filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.addUrlPatterns("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
         return filterRegistrationBean;
+
     }
 
 

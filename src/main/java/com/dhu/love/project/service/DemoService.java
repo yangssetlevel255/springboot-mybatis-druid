@@ -1,6 +1,8 @@
 package com.dhu.love.project.service;
 
+import java.util.Map;
+
 public interface DemoService {
 
-    String searchLove(String param);
+    Map searchLove(String param);
 }
