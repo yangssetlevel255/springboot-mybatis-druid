@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhu.love.project.mapper.UserMapper">
+    <!-- 登录验证-->
+    <select id="login" resultType="com.dhu.love.project.entity.User" parameterType="String">
+        select * from login_auth
+        where username=#{username};
+    </select>
+    <select id="findOne" resultType="com.dhu.love.project.entity.User" parameterType="String">
+        select * from login_auth
+        where username=#{username};
+    </select>
+    <insert id="register" useGeneratedKeys="true" keyProperty="userid" parameterType="com.dhu.love.project.entity.User">
+        insert into login_auth(username,passwd) values(#{username},#{passwd});
+    </insert>
+</mapper>
