@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhu.love.project.mapper.DatemanagerMapper">
+
+    <!-- 查找用户 -->
+    <select id="findDate" resultType="com.dhu.love.project.entity.Datemanager" parameterType="String">
+        select * from date_management where mid =#{mid};
+    </select>
+
+</mapper>

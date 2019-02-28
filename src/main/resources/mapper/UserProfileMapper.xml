@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhu.love.project.mapper.UserProfileMapper">
+    <!-- 新增用户 -->
+    <insert id="addRequire" useGeneratedKeys="true" keyProperty="userid" parameterType="com.dhu.love.project.entity.UserProfile">
+        insert into user_info(userid,tdivorce,tdivorce_p,tchild,tchild_p,tlocal,tlocal_p,thouse
+        ,thouse_p,tcar,tcar_p,tsalary,tsalary_p,teducation,teducation_p,tbirthmin
+        ,tbirthmax,tbirth_p,requirement,requirement_p,uuid) values(#{userid},#{tdivorce},#{tdivorce_p}
+        ,#{tchild},#{tchild_p},#{tlocal},#{tlocal_p},#{thouse},#{thouse_p}
+        ,#{tcar},#{tcar_p},#{tsalary},#{tsalary_p},#{teducation},#{teducation_p}
+        ,#{tbirthmin},#{tbirthmax},#{tbirth_p},#{requirement},#{requirement_p},#{uuid});
+    </insert>
+    <!-- 查找用户 -->
+    <select id="findRequire" resultType="com.dhu.love.project.entity.UserProfile" parameterType="String">
+        select * from user_info where uuid =#{uuid};
+    </select>
+
+</mapper>
