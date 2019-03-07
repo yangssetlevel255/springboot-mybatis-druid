@@ -14,6 +14,7 @@ public class DatemanagerDao {
     public int addDate(Datemanager datemanager){return datemanagerMapper.addDate(datemanager);}
     public int updateDate(Datemanager datemanager){return  datemanagerMapper.updateDate(datemanager);}
     public int deleteDate(int  mid){return  datemanagerMapper.deleteDate(mid);}
+    public int updateCuster(String status,int mmid,int mfid){return  datemanagerMapper.updateCustomer(status,mmid,mfid);}
     public Map findDateByname(String mmname){ return datemanagerMapper.findDateByname(mmname);}
     public Datemanager findDateOne(String mmid,String mmmobile,String mfid,String mfmobile){return datemanagerMapper.findDateOne(mmid,mmmobile,mfid,mfmobile);}
     public Map findDateAll(){return  datemanagerMapper.findDateAll();}

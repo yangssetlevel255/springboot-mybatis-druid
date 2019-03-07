@@ -164,6 +164,9 @@ public class CustomerInfoController {
     @ResponseBody
     public  Map findCustomerAll()
     {
-        return  customerInfoService.findCustomerAll();
+
+        Map map = customerInfoService.findCustomerAll();
+        System.out.print(map);
+        return map;
     }
 }
