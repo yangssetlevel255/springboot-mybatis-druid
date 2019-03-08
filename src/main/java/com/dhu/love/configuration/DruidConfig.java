@@ -125,7 +125,7 @@ public class DruidConfig {
         wallConfig.setNoneBaseStatementAllow(false);
         wallConfig.setSelectIntoOutfileAllow(false);
 
-        wallConfig.setMustParameterized(true);
+        wallConfig.setMustParameterized(false);
         wallConfig.setMetadataAllow(false);
         wallConfig.setWrapAllow(false);
 

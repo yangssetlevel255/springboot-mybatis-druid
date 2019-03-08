@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhu.love.grade.mapper.GradeMapper">
+
+    <select id="queryCustomerById" resultType="com.dhu.love.grade.model.Customer" parameterType="java.lang.String">
+        select  customer_id as customerId,
+                customer_name as customerName,
+                gender,
+                birthday,
+                age,
+                birth_place as birthPlace,
+                address,
+                phone_number as phoneNumber,
+                education,
+                profession,
+                salary,
+                house_number as houseNumber,
+                car as haveCar,
+                hobby,
+                personality,
+                divorce as isDivorce,
+                company,
+                child as childNumber,
+                t.status
+        from  customer_info t
+        where t.customer_id=#{customerId}
+    </select>
+
+
+    <select id="queryCustomerRequireById" resultType="com.dhu.love.grade.model.CustomerRequire" parameterType="java.lang.String">
+        select customer_id as customerId,
+               tdivorce as divorceReq,
+               tdivorce_p as divorceWeg,
+               tchild as childReq,
+               tchild_p as childWeg,
+               tlocal as localReq,
+               tlocal_p as localWeg,
+               thouse as houseReq,
+               thouse_p as houseWeg,
+               tcar as carReq,
+               tcar_p as carWeg,
+               tsalary as salaryReq,
+               tsalary_p as salaryWeg,
+               teducation as educationReq,
+               teducation_p as educationWeg,
+               tbirthmin as minAgeReq,
+               tbirthmax as maxAgeReq,
+               tprofession as professionReq,
+               tprofession_p as professionWeg
+        from  customer_requirement
+        where t.customer_id=#{customerId}
+    </select>
+
+    <select id="queryCustomerByRequire" resultType="com.dhu.love.grade.model.Customer" parameterType="java.lang.String">
+        <![CDATA[
+        select  customer_id as customerId,
+                customer_name as customerName,
+                gender,
+                birthday,
+                age,
+                birth_place as birthPlace,
+                address,
+                phone_number as phoneNumber,
+                education,
+                profession,
+                salary,
+                house_number as houseNumber,
+                car as haveCar,
+                hobby,
+                personality,
+                divorce as isDivorce,
+                company,
+                child as childNumber,
+                t.status
+        from    customer_info t
+        where   gender!=#{gender},
+        AND	    age>=#{minAge},
+        AND 	age<=#{maxAge},
+        And		address in ${address},
+        AND		education>=#{education},
+        AND     profession in ${profession},
+        AND		salary>=#{salary},
+        AND     house_number>=#{houseNumber},
+        AND     car!=#{car} ,
+        AND     child<=#{child}
+    ]]>
+    </select>
+
+    <select id="queryAllAddress" resultType="java.lang.String">
+        select dict_value
+        from  sys_dict
+        where dict_type='address'
+    </select>
+
+    <select id="queryAllProfession" resultType="java.lang.String">
+        select dict_value
+        from  sys_dict
+        where dict_type='profession'
+    </select>
+
+</mapper>
