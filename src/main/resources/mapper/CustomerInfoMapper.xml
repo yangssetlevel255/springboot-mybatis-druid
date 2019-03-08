@@ -38,14 +38,14 @@
 
     <!-- 查询指定用户 用户名+手机号确定唯一用户-->
     <select id="findCustomerOne" resultType="com.dhu.love.project.entity.CustomerInfo" parameterType="String">
-        select * from customer_info , user_requirement
-        (select customer_id from customer_info,user_requirement )
-        where customer_name=#{customer_name} and phone_number=#{phone_number} and;
+        select * from customer_info join customer_requirement on customer_info.custormer_id = customer_requirement.customer_id
+        where customer_info.customer_name=#{customer_name} and customer_info.phone_number=#{phone_number} and;
     </select>
     
     <!-- 全部用户 -->
     <select id="findCustomerAll" resultType="java.util.Map">
-        select * from customer_info ;
+        select * from customer_info join user_requirement
+        where customer_info.customer_id = user_requirement.customer_id;
     </select>
     
     <!-- 用户数统计 -->

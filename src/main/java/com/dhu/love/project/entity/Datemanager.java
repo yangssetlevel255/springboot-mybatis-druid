@@ -8,9 +8,12 @@ public class Datemanager {
     public String mfname; //女方姓名
     public int mfid;   //女方id
     public int mmmobile; //男方手机号
+
+
+    public int mfmobile;
     public Date starttime;  //女方手机号
     public Date endtime; //相亲开始时间
-    public String datestatus; //相亲结束时间
+    public int datestatus; //相亲结束时间
 
     public Integer getMid() {
         return mid;
@@ -59,6 +62,13 @@ public class Datemanager {
     public void setMmmobile(int mmmobile) {
         this.mmmobile = mmmobile;
     }
+    public int getMfmobile() {
+        return mfmobile;
+    }
+
+    public void setMfmobile(int mfmobile) {
+        this.mfmobile = mfmobile;
+    }
 
     public Date getStarttime() {
         return starttime;
@@ -76,11 +86,11 @@ public class Datemanager {
         this.endtime = mendtime;
     }
 
-    public String getDatestatus() {
+    public int getDatestatus() {
         return datestatus;
     }
 
-    public void setDatestatus(String datestatus) {
+    public void setDatestatus(int datestatus) {
         this.datestatus = datestatus;
     }
 }

@@ -3,9 +3,46 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dhu.love.project.mapper.DatemanagerMapper">
 
-    <!-- 查找用户 -->
-    <select id="findDate" resultType="com.dhu.love.project.entity.Datemanager" parameterType="String">
-        select * from date_management where mid =#{mid};
+    <!-- 新增记录 -->
+    <insert id="addDate" useGeneratedKeys="true" keyProperty="mid" parameterType="com.dhu.love.project.entity.Datemanager">
+        insert into table date_management(mmname,mmid,mfname,mfid,mmmobile,mfmobile
+        ,starttime,endtime,datestatus)
+        values(#{mmname},#{mmid},#{mfname},#{mfid},#{mmmobile},#{mfmobile}
+        ,#{starttime},#{endtime},#{datestatus});
+    </insert>
+
+    <!-- 更新记录 -->
+    <update id="updateDate" useGeneratedKeys="true" keyProperty="mid" parameterType="com.dhu.love.project.entity.Datemanager">
+        update table date_management
+        set starttime=#{starttime},endtime=#{endtime},datestatus=#{datestatus}
+        where  mmid=#{mmid} and mmmobile=#{mmmobile} and mfid=#{mfid} and mfmobile=#{mfmobile};
+    </update>
+
+    <!-- 更新用户表用户状态-->
+    <update id="updateCustomer" parameterType="String">
+        update table customer_info
+        set status = #{datestatus} where customer_id=#{mmid};
+        <!--update table customer_info
+        #set status = #{datestatus} where customer_id=#{mfid};-->
+    </update>
+
+    <!-- 删除记录 -->
+    <delete id="deleteDate" parameterType="int">
+        select * from date_management where mid=#{mid};
+    </delete>
+    <!-- 通过姓名查找记录 -->
+    <select id="findDateByname" resultType="java.util.Map" parameterType="String">
+        select * from date_management where mmname = #{mmname} or mfname=#{mmname};
+    </select>
+
+    <!-- 查找唯一记录-->
+    <select id="findDateOne" resultType="com.dhu.love.project.entity.Datemanager" parameterType="com.dhu.love.project.entity.Datemanager">
+        select * from date_management
+        where mmid=#{mmid} and mfid=#{mfid};
+    </select>
+    <!-- 查找记录 -->
+    <select id="findDateAll" resultType="java.util.Map" >
+        select * from date_management;
     </select>
 
 </mapper>

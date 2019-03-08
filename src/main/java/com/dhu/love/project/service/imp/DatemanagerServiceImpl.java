@@ -25,6 +25,7 @@ public class DatemanagerServiceImpl implements DatemanagerService {
     {
         return  datemanagerDao.deleteDate(mid);
     }
+    public  int updateCustomer(String status,int mmid,int mfid){return  datemanagerDao.updateCuster(status,mmid,mfid);}
     public Map findDateByname(String mmname)
     {
         return  datemanagerDao.findDateByname(mmname);
