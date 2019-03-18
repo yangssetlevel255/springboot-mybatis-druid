@@ -23,7 +23,7 @@ public class MybatisConfig {
         SqlSessionFactory sqlSessionFactory=null;
         try {
             sqlSessionFactoryBean.setDataSource(dataSource);
-            sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/*.xml"));
+            sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
             sqlSessionFactory=sqlSessionFactoryBean.getObject();
         }catch (Exception e){
             e.printStackTrace();
@@ -40,7 +40,7 @@ public class MybatisConfig {
     public MapperScannerConfigurer mapperScannerConfigurer(){
         MapperScannerConfigurer mapperScannerConfigurer=new MapperScannerConfigurer();
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
-        mapperScannerConfigurer.setBasePackage("com.dhu.love.project");
+        mapperScannerConfigurer.setBasePackage("com.dhu.love.manage");
         return mapperScannerConfigurer;
     }
 }

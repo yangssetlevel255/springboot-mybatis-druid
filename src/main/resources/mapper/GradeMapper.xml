@@ -49,10 +49,10 @@
                tprofession as professionReq,
                tprofession_p as professionWeg
         from  customer_requirement
-        where t.customer_id=#{customerId}
+        where customer_id=#{customerId}
     </select>
 
-    <select id="queryCustomerByRequire" resultType="com.dhu.love.grade.model.Customer" parameterType="java.lang.String">
+    <select id="queryCustomerByRequire" resultType="com.dhu.love.grade.model.Customer" parameterType="java.util.Map">
         <![CDATA[
         select  customer_id as customerId,
                 customer_name as customerName,
@@ -74,17 +74,23 @@
                 child as childNumber,
                 t.status
         from    customer_info t
-        where   gender!=#{gender},
-        AND	    age>=#{minAge},
-        AND 	age<=#{maxAge},
-        And		address in ${address},
-        AND		education>=#{education},
-        AND     profession in ${profession},
-        AND		salary>=#{salary},
-        AND     house_number>=#{houseNumber},
-        AND     car!=#{car} ,
+        where   gender!=#{gender}
+        AND	    age>=#{minAge}
+        AND 	age<=#{maxAge}
+        AND		education>=#{education}
+        AND		salary>=#{salary}
+        AND     house_number>=#{houseNumber}
+        AND     car!=#{car}
         AND     child<=#{child}
-    ]]>
+            ]]>
+        AND     profession in
+        <foreach item="item" index="index" collection="profession" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND     address in
+        <foreach item="item" index="index" collection="address" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 
     <select id="queryAllAddress" resultType="java.lang.String">

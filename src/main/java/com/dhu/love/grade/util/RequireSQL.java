@@ -11,9 +11,9 @@ public class RequireSQL {
     private String gender;
     private int maxAge;
     private int minAge;
-    private String addressRange;
+    private List<String> addressRange;
     private int minEducation;
-    private String professionRange;
+    private List<String> professionRange;
     private int minSalary;
     private int minHouseNumber;
     private String haveCar;
@@ -65,17 +65,16 @@ public class RequireSQL {
         List<String> addressList =this.commonData.getAddressList();
         String customerAddress=this.customer.getAddress();
         String customerRequireAddress=this.customerRequire.getLocalReq();
-        StringBuffer sb=new StringBuffer("(");
+        List<String> list =new ArrayList();
         if("0".equals(customerRequireAddress)){
             addressList.forEach(address->{
-                sb.append("'").append(address).append("'").append(",");
+                list.add(address);
             });
-            sb.append(")");
-            this.addressRange=sb.toString();
+            this.addressRange=list;
 
         }else{
-            String adr="("+customerAddress+")";
-            this.addressRange=adr;
+            list.add(customerAddress);
+            this.addressRange=list;
         }
     }
 
@@ -86,20 +85,18 @@ public class RequireSQL {
     private void setProfessionRange(){
         List<String> professionList=this.commonData.getProfessionList();
         String professionRequire=Optional.ofNullable(this.customerRequire.getProfessionReq()).orElse("");
-        StringBuffer sb =new StringBuffer("(");
+        List<String> list =new ArrayList();
         if(StringUtils.isEmpty(professionRequire)){
             professionList.forEach(profession->{
-                sb.append("'").append(profession).append("'").append(",");
+                list.add(profession);
             });
-            sb.append(")");
         }else{
             List<String> professionRequireList= Arrays.asList(professionRequire.split(","));
             professionRequireList.forEach(profession->{
-                sb.append("'").append(profession).append("'").append(",");
+                list.add(profession);
             });
-            sb.append(")");
         }
-        this.professionRange=sb.toString();
+        this.professionRange=list;
     }
 
     private void setMinSalary(){

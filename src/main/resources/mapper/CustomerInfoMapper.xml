@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dhu.love.project.mapper.CustomerInfoMapper">
+<mapper namespace="com.dhu.love.manage.mapper.CustomerInfoMapper">
 
     <!-- 新增客户-->
-    <insert id="addCustomerInfo" useGeneratedKeys="true" keyProperty="customer_id" parameterType="com.dhu.love.project.entity.CustomerInfo">
+    <insert id="addCustomerInfo" useGeneratedKeys="true" keyProperty="customer_id" parameterType="com.dhu.love.manage.entity.CustomerInfo">
         insert into table customer_info(customer_name,gender,birthday,age
         ,birth_place,address,phone_number,education,profession,salary
         ,house_number,car,hobby,personality,divorce,status,company
@@ -16,7 +16,7 @@
     </insert>
 
     <!-- 更新客户 -->
-    <update id="updateCustomerInfo" useGeneratedKeys="true" keyProperty="customer_id" parameterType="com.dhu.love.project.entity.CustomerInfo">
+    <update id="updateCustomerInfo" useGeneratedKeys="true" keyProperty="customer_id" parameterType="com.dhu.love.manage.entity.CustomerInfo">
         update table customer_info
         set customer_name=#{customer_name},gender=#{gender},birthday=#{birthday},
         age=#{age},birth_place=#{birth_place},address=#{address},phone_number=#{phone_number},
@@ -37,15 +37,33 @@
     </select>
 
     <!-- 查询指定用户 用户名+手机号确定唯一用户-->
-    <select id="findCustomerOne" resultType="com.dhu.love.project.entity.CustomerInfo" parameterType="String">
+    <select id="findCustomerOne" resultType="com.dhu.love.manage.entity.CustomerInfo" parameterType="String">
         select * from customer_info join customer_requirement on customer_info.custormer_id = customer_requirement.customer_id
         where customer_info.customer_name=#{customer_name} and customer_info.phone_number=#{phone_number} and;
     </select>
     
     <!-- 全部用户 -->
-    <select id="findCustomerAll" resultType="java.util.Map">
-        select * from customer_info join user_requirement
-        where customer_info.customer_id = user_requirement.customer_id;
+    <select id="findCustomerAll" resultType="com.dhu.love.grade.model.Customer">
+        select  customer_id as customerId,
+                customer_name as customerName,
+                gender,
+                birthday,
+                age,
+                birth_place as birthPlace,
+                address,
+                phone_number as phoneNumber,
+                education,
+                profession,
+                salary,
+                house_number as houseNumber,
+                car as haveCar,
+                hobby,
+                personality,
+                divorce as isDivorce,
+                company,
+                child as childNumber,
+                t.status
+        from  customer_info t
     </select>
     
     <!-- 用户数统计 -->

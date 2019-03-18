@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dhu.love.project.mapper.DatemanagerMapper">
+<mapper namespace="com.dhu.love.manage.mapper.DatemanagerMapper">
 
     <!-- 新增记录 -->
-    <insert id="addDate" useGeneratedKeys="true" keyProperty="mid" parameterType="com.dhu.love.project.entity.Datemanager">
+    <insert id="addDate" useGeneratedKeys="true" keyProperty="mid" parameterType="com.dhu.love.manage.entity.Datemanager">
         insert into table date_management(mmname,mmid,mfname,mfid,mmmobile,mfmobile
         ,starttime,endtime,datestatus)
         values(#{mmname},#{mmid},#{mfname},#{mfid},#{mmmobile},#{mfmobile}
@@ -12,7 +12,7 @@
     </insert>
 
     <!-- 更新记录 -->
-    <update id="updateDate" useGeneratedKeys="true" keyProperty="mid" parameterType="com.dhu.love.project.entity.Datemanager">
+    <update id="updateDate" useGeneratedKeys="true" keyProperty="mid" parameterType="com.dhu.love.manage.entity.Datemanager">
         update table date_management
         set starttime=#{starttime},endtime=#{endtime},datestatus=#{datestatus}
         where  mmid=#{mmid} and mmmobile=#{mmmobile} and mfid=#{mfid} and mfmobile=#{mfmobile};
@@ -36,7 +36,7 @@
     </select>
 
     <!-- 查找唯一记录-->
-    <select id="findDateOne" resultType="com.dhu.love.project.entity.Datemanager" parameterType="com.dhu.love.project.entity.Datemanager">
+    <select id="findDateOne" resultType="com.dhu.love.manage.entity.Datemanager" parameterType="com.dhu.love.manage.entity.Datemanager">
         select * from date_management
         where mmid=#{mmid} and mfid=#{mfid};
     </select>
