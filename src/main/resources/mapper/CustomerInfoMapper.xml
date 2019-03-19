@@ -44,8 +44,8 @@
     
     <!-- 全部用户 -->
     <select id="findCustomerAll" resultType="java.util.Map">
-        select * from customer_info join user_requirement
-        where customer_info.customer_id = user_requirement.customer_id;
+        select * from customer_info join customer_requirement
+        where customer_info.customer_id = customer_requirement.customer_id;
     </select>
     
     <!-- 用户数统计 -->
