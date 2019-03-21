@@ -2,7 +2,9 @@ package com.dhu.love.grade.model;
 
 public class CustomerRequire {
 
-    private String customerId;
+
+    private Integer rid;
+    private int customerId;
     private String divorceReq;
     private int childReq;
     private String localReq;
@@ -22,12 +24,18 @@ public class CustomerRequire {
     private int salaryWeg;
     private int educationWeg;
     private int ageWeg;
+    private String requirement;
+    private int requirement_p;
 
-    public String getCustomerId() {
+    public Integer getRid() { return rid; }
+
+    public void setRid(Integer rid) { this.rid = rid; }
+
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
@@ -182,4 +190,12 @@ public class CustomerRequire {
     public void setAgeWeg(int ageWeg) {
         this.ageWeg = ageWeg;
     }
+
+    public String getRequirement() { return requirement; }
+
+    public void setRequirement(String requirement) { this.requirement = requirement; }
+
+    public int getRequirement_p() { return requirement_p; }
+
+    public void setRequirement_p(int requirement_p) { this.requirement_p = requirement_p;}
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhu.love.manage.mapper.UserRequirementMapper">
+    <insert id="addUserRequirment" useGeneratedKeys="true" keyProperty="rid" parameterType="com.dhu.love.grade.model.CustomerRequire">
+        insert into customer_requirement(
+        rid,customer_id,tdivorce,tdivorce_p,tchild,tchild_p,
+        tlocal,tlocal_p,thouse,thouse_p,tcar,tcar_p,tsalary,
+        tsalary_p,teducation,teducation_p,tbirthmin,tbirthmax,
+        tbirth_p,requirement,requirement_p,tprofession,tprofession_p
+        )
+        values(#{customerId},#{divorceReq},#{divorceWeg},#{childReq},#{childWeg},
+        #{localReq},#{localWeg},#{houseReq},#{houseWeg},#{carReq},#{carWeg},#{salaryReq},
+        #{salaryWeg},#{educationReq},#{educationWeg},#{minAgeReq},#{maxAgeReq},
+        #{ageWeg},#{requirement},#{requirement_p},#{professionReq},#{professionWeg}
+        )
+    </insert>
+    <update id="updateUserRequirement" useGeneratedKeys="true" keyProperty="rid" parameterType="com.dhu.love.grade.model.CustomerRequire">
+        update table customer_requirement
+        set customer_id=#{customerId},tdivorce=#{divorceReq},tdivorce_p=#{divorceWeg},
+        tchild=#{childReq},tchild_p=#{childWeg},tlocal=#{localReq},tlocal_p=#{localWeg},
+        thouse=#{houseReq},thouse_p=#{houseWeg},tcar=#{carReq},tcar_p=#{carWeg},
+        tsalary=#{salaryReq},tsalary_p=#{salaryWeg},teducation=#{educationReq},
+        teducation_p=#{educationWeg},tbirthmin=#{minAgeReq},tbirthmax=#{maxAgeReq},
+        tbirth_p=#{ageWeg},requirement=#{requirement},requirement_p=#{requirement_p},
+        tprofession=#{professionReq},tprofession_p=#{professionWeg}
+        where rid=#{rId}
+    </update>
+    <delete id="deleteUserRequirement" parameterType="int">
+        delete * from customer_requirement
+        where rid=#{rId}
+    </delete>
+</mapper>

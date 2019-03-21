@@ -2,8 +2,7 @@ package com.dhu.love.manage.controller;
 
 import com.dhu.love.common.ResponseBean;
 import com.dhu.love.grade.model.Customer;
-import com.dhu.love.manage.entity.CustomerInfo;
-import com.dhu.love.manage.entity.UserRequirement;
+import com.dhu.love.grade.model.CustomerRequire;
 import com.dhu.love.manage.service.CustomerInfoService;
 import com.dhu.love.manage.service.UserRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,61 +32,61 @@ public class CustomerInfoController {
     @ResponseBody
     public String addCustomer(@RequestParam Map <String,String> map, HttpServletRequest request, HttpServletResponse response)
     {
-        CustomerInfo customerInfo =new CustomerInfo();
-        customerInfo.setCustomer_name(map.get("customer_name"));
-        customerInfo.setGender(map.get("gender"));
-        customerInfo.setBirthday(map.get("birthday"));
-        customerInfo.setAge(Integer.valueOf(map.get("age")));
-        customerInfo.setBirth_place(map.get("birth_place"));
-        customerInfo.setAddress(map.get("address"));
-        customerInfo.setPhone_number(map.get("phone_number"));
-        customerInfo.setProfession(map.get("profession"));
-        customerInfo.setSalary(Integer.valueOf(map.get("salary")));
-        customerInfo.setHouse_number(Integer.valueOf(map.get("house_number")));
-        customerInfo.setCar(map.get("setcar"));
-        customerInfo.setHobby(map.get("hobby"));
-        customerInfo.setPersonality(map.get("personality"));
-        customerInfo.setDivorce(map.get("divorce"));
-        customerInfo.setCompany(map.get("company"));
-        customerInfo.setChild(Integer.valueOf(map.get("child")));
+        Customer customer =new Customer();
+        customer.setCustomerName(map.get("customerName"));
+        customer.setGender(map.get("gender"));
+        customer.setBirthday(map.get("birthday"));
+        customer.setAge(Integer.valueOf(map.get("age")));
+        customer.setBirthPlace(map.get("birthPlace"));
+        customer.setAddress(map.get("address"));
+        customer.setPhoneNumber(map.get("phoneNumber"));
+        customer.setProfession(map.get("profession"));
+        customer.setSalary(Integer.valueOf(map.get("salary")));
+        customer.setHouseNumber(Integer.valueOf(map.get("houseNumber")));
+        customer.setHaveCar(map.get("haveCar"));
+        customer.setHobby(map.get("hobby"));
+        customer.setPersonality(map.get("personality"));
+        customer.setIsDivorce(map.get("isDivorce"));
+        customer.setCompany(map.get("company"));
+        customer.setChildNumber(Integer.valueOf(map.get("childNumber")));
         // 设置用户状态 可匹配 进行中 停用 默认新增用户的时候 default值为可匹配
-        customerInfo.setStatus("可匹配");
+        customer.setStatus("可匹配");
 
         //插入customer_info表
 
-        if(customerInfoService.findCustomerOne(customerInfo.getCustomer_name(),customerInfo.getPhone_number())!= null)
+        if(customerInfoService.findCustomerOne(customer.getCustomerName(),customer.getPhoneNumber())!= null)
         {
             return "新增失败...该用户已经存在!";
         }
         else
         {
-            customerInfoService.addCustomer(customerInfo);
-            UserRequirement userRequirement = new UserRequirement();
-            userRequirement.setCustomer_id(customerInfoService.findCustomerOne(customerInfo.getCustomer_name(),customerInfo.getPhone_number()).getCustomer_id());
-            userRequirement.setTdivorce(map.get("tdivorce"));
-            userRequirement.setTdivorce_p(Integer.valueOf(map.get("tdivorce_p")));
-            userRequirement.setTchild(map.get("tchild"));
-            userRequirement.setTchild_p(Integer.valueOf(map.get("tchild_p")));
-            userRequirement.setTlocal(map.get("tlocal"));
-            userRequirement.setTlocal_p(Integer.valueOf(map.get("tlocal_p")));
-            userRequirement.setThouse(map.get("thouse"));
-            userRequirement.setThouse_p(Integer.valueOf(map.get("thouse_p")));
-            userRequirement.setTcar(map.get("tcar"));
-            userRequirement.setTcar_p(Integer.valueOf(map.get("tcar_p")));
-            userRequirement.setTsalary(map.get("tsalary"));
-            userRequirement.setTsalary_p(Integer.valueOf(map.get("tsalary_p")));
-            userRequirement.setTeducation(map.get("teducation"));
-            userRequirement.setTeducation_p(Integer.valueOf(map.get("teducation_p")));
-            userRequirement.setTbirthmin(Integer.valueOf(map.get("tbirthmin")));
-            userRequirement.setTbirthmax(Integer.valueOf(map.get("tbirthmax")));
-            userRequirement.setTbirth_p(Integer.valueOf(map.get("tbirth_p")));
-            userRequirement.setRequirement(map.get("requirement"));
-            userRequirement.setRequirement_p(Integer.valueOf(map.get("requirement_p")));
-            userRequirement.setTprofession(map.get("tprofession"));
-            userRequirement.setTprofession_p(Integer.valueOf(map.get("tprofession_p")));
+            customerInfoService.addCustomer(customer);
+            CustomerRequire customerRequire = new CustomerRequire();
+            customerRequire.setCustomerId((customerInfoService.findCustomerOne(customer.getCustomerName(),customer.getPhoneNumber())).getCustomerId());
+            customerRequire.setDivorceReq(map.get("divorceReq"));
+            customerRequire.setDivorceWeg(Integer.valueOf(map.get("divorceWeg")));
+            customerRequire.setChildReq(Integer.valueOf(map.get("childReq")));
+            customerRequire.setChildWeg(Integer.valueOf(map.get("childWeg")));
+            customerRequire.setLocalReq(map.get("localReq"));
+            customerRequire.setLocalWeg(Integer.valueOf(map.get("localWeg")));
+            customerRequire.setHouseReq(Integer.valueOf(map.get("houseReq")));
+            customerRequire.setHouseWeg(Integer.valueOf(map.get("houseWeg")));
+            customerRequire.setCarReq(map.get("carReq"));
+            customerRequire.setCarWeg(Integer.valueOf(map.get("carWeg")));
+            customerRequire.setSalaryReq(Integer.valueOf(map.get("salaryReq")));
+            customerRequire.setSalaryWeg(Integer.valueOf(map.get("salaryWeg")));
+            customerRequire.setEducationReq(Integer.valueOf(map.get("educationReq")));
+            customerRequire.setEducationWeg(Integer.valueOf(map.get("educationWeg")));
+            customerRequire.setMinAgeReq(Integer.valueOf(map.get("minAgeReq")));
+            customerRequire.setMaxAgeReq(Integer.valueOf(map.get("maxAgeReq")));
+            customerRequire.setAgeWeg(Integer.valueOf(map.get("ageWeg")));
+            customerRequire.setRequirement(map.get("requirement"));
+            customerRequire.setRequirement_p(Integer.valueOf(map.get("requirement_p")));
+            customerRequire.setProfessionReq(map.get("professionReq"));
+            customerRequire.setProfessionWeg(Integer.valueOf(map.get("professionWeg")));
 
             //插入 user_requirement
-            userRequirementService.addUserRequirement(userRequirement);
+            userRequirementService.addUserRequirement(customerRequire);
 
             return  "用户新增成功!";
 
@@ -99,54 +98,54 @@ public class CustomerInfoController {
     @ResponseBody
     public String updateCustomer(@RequestParam Map <String,String> map, HttpServletRequest request, HttpServletResponse response)
     {
-        CustomerInfo customerInfo = new CustomerInfo();
-        customerInfo.setCustomer_id(Integer.valueOf(map.get("customer_id")));
-        customerInfo.setCustomer_name(map.get("customer_name"));
-        customerInfo.setGender(map.get("gender"));
-        customerInfo.setBirthday(map.get("birthday"));
-        customerInfo.setAge(Integer.valueOf(map.get("age")));
-        customerInfo.setBirth_place(map.get("birth_place"));
-        customerInfo.setAddress(map.get("address"));
-        customerInfo.setPhone_number(map.get("phone_number"));
-        customerInfo.setProfession(map.get("profession"));
-        customerInfo.setSalary(Integer.valueOf(map.get("salary")));
-        customerInfo.setHouse_number(Integer.valueOf(map.get("house_number")));
-        customerInfo.setCar(map.get("setcar"));
-        customerInfo.setHobby(map.get("hobby"));
-        customerInfo.setPersonality(map.get("personality"));
-        customerInfo.setDivorce(map.get("divorce"));
-        customerInfo.setCompany(map.get("company"));
-        customerInfo.setChild(Integer.valueOf(map.get("child")));
-        customerInfo.setStatus(map.get("status"));
-        customerInfoService.updateCustomer(customerInfo);
+        Customer customer = new Customer();
+        customer.setCustomerId(Integer.valueOf(map.get("customerId")));
+        customer.setCustomerName(map.get("customerName"));
+        customer.setGender(map.get("gender"));
+        customer.setBirthday(map.get("birthday"));
+        customer.setAge(Integer.valueOf(map.get("age")));
+        customer.setBirthPlace(map.get("birthPlace"));
+        customer.setAddress(map.get("address"));
+        customer.setPhoneNumber(map.get("phone_number"));
+        customer.setProfession(map.get("profession"));
+        customer.setSalary(Integer.valueOf(map.get("salary")));
+        customer.setHouseNumber(Integer.valueOf(map.get("houseNumber")));
+        customer.setHaveCar(map.get("haveCar"));
+        customer.setHobby(map.get("hobby"));
+        customer.setPersonality(map.get("personality"));
+        customer.setIsDivorce(map.get("isDivorce"));
+        customer.setCompany(map.get("company"));
+        customer.setChildNumber(Integer.valueOf(map.get("childNumber")));
+        customer.setStatus(map.get("status"));
+        customerInfoService.updateCustomer(customer);
 
         //同步更新user_requirement
-        UserRequirement userRequirement = new UserRequirement();
-        userRequirement.setRid(Integer.valueOf(map.get("rid")));
-        userRequirement.setCustomer_id(Integer.valueOf(map.get("customer_id")));
-        userRequirement.setTdivorce(map.get("tdivorce"));
-        userRequirement.setTdivorce_p(Integer.valueOf(map.get("tdivorce_p")));
-        userRequirement.setTchild(map.get("tchild"));
-        userRequirement.setTchild_p(Integer.valueOf(map.get("tchild_p")));
-        userRequirement.setTlocal(map.get("tlocal"));
-        userRequirement.setTlocal_p(Integer.valueOf(map.get("tlocal_p")));
-        userRequirement.setThouse(map.get("thouse"));
-        userRequirement.setThouse_p(Integer.valueOf(map.get("thouse_p")));
-        userRequirement.setTcar(map.get("tcar"));
-        userRequirement.setTcar_p(Integer.valueOf(map.get("tcar_p")));
-        userRequirement.setTsalary(map.get("tsalary"));
-        userRequirement.setTsalary_p(Integer.valueOf(map.get("tsalary_p")));
-        userRequirement.setTeducation(map.get("teducation"));
-        userRequirement.setTeducation_p(Integer.valueOf(map.get("teducation_p")));
-        userRequirement.setTbirthmin(Integer.valueOf(map.get("tbirthmin")));
-        userRequirement.setTbirthmax(Integer.valueOf(map.get("tbirthmax")));
-        userRequirement.setTbirth_p(Integer.valueOf(map.get("tbirth_p")));
-        userRequirement.setRequirement(map.get("requirement"));
-        userRequirement.setRequirement_p(Integer.valueOf(map.get("requirement_p")));
-        userRequirement.setTprofession(map.get("tprofession"));
-        userRequirement.setTprofession_p(Integer.valueOf(map.get("tprofession_p")));
+        CustomerRequire customerRequire = new CustomerRequire();
+        customerRequire.setRid(Integer.valueOf(map.get("rid")));
+        customerRequire.setCustomerId(Integer.valueOf(map.get("customerId")));
+        customerRequire.setDivorceReq(map.get("divorceReq"));
+        customerRequire.setDivorceWeg(Integer.valueOf(map.get("divorceWeg")));
+        customerRequire.setChildReq(Integer.valueOf(map.get("childReq")));
+        customerRequire.setChildWeg(Integer.valueOf(map.get("childWeg")));
+        customerRequire.setLocalReq(map.get("localReq"));
+        customerRequire.setLocalWeg(Integer.valueOf(map.get("localWeg")));
+        customerRequire.setHouseReq(Integer.valueOf(map.get("houseReq")));
+        customerRequire.setHouseWeg(Integer.valueOf(map.get("houseWeg")));
+        customerRequire.setCarReq(map.get("carReq"));
+        customerRequire.setCarWeg(Integer.valueOf(map.get("carWeg")));
+        customerRequire.setSalaryReq(Integer.valueOf(map.get("salaryReq")));
+        customerRequire.setSalaryWeg(Integer.valueOf(map.get("salaryWeg")));
+        customerRequire.setEducationReq(Integer.valueOf(map.get("educationReq")));
+        customerRequire.setEducationWeg(Integer.valueOf(map.get("educationWeg")));
+        customerRequire.setMinAgeReq(Integer.valueOf(map.get("minAgeReq")));
+        customerRequire.setMaxAgeReq(Integer.valueOf(map.get("maxAgeReq")));
+        customerRequire.setAgeWeg(Integer.valueOf(map.get("ageWeg")));
+        customerRequire.setRequirement(map.get("requirement"));
+        customerRequire.setRequirement_p(Integer.valueOf(map.get("requirement_p")));
+        customerRequire.setProfessionReq(map.get("professionReq"));
+        customerRequire.setProfessionWeg(Integer.valueOf(map.get("professionWeg")));
 
-        userRequirementService.updateUserRequirement(userRequirement);
+        userRequirementService.updateUserRequirement(customerRequire);
 
         return "更新成功!";
     }
@@ -155,15 +154,15 @@ public class CustomerInfoController {
     @ResponseBody
     public String deleteCustomer(@RequestParam Map <String,String> map, HttpServletRequest request, HttpServletResponse response)
     {
-        String customer_name = map.get("customer_name");
-        String phone_number = map.get("phone_number");
-        CustomerInfo customerInfo= customerInfoService.findCustomerOne(customer_name,phone_number);
-        if (customerInfo != null) {
+        String customerName = map.get("customerName");
+        String phoneNumber = map.get("phoneNumber");
+        Customer customer= customerInfoService.findCustomerOne(customerName,phoneNumber);
+        if (customer != null) {
             //删除user_info
-            int customer_id = customerInfo.getCustomer_id();
-            customerInfoService.deleteCustomer(customer_id);
+            int customerId = customer.getCustomerId();
+            customerInfoService.deleteCustomer(customerId);
             //同步删除customer_id
-            userRequirementService.deleteUserRequirement(customer_id);
+            userRequirementService.deleteUserRequirement(customerId);
             return "删除成功!";
         }
         else
@@ -177,5 +176,27 @@ public class CustomerInfoController {
         List<Customer> customerList=customerInfoService.findCustomerAll();
         ResponseBean responseBean=new ResponseBean(true,customerList);
         return responseBean;
+    }
+    @RequestMapping(value = "findCustomerByname" , method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public  ResponseBean findCustomerByName(@RequestParam String customerName, HttpServletRequest request, HttpServletResponse response)
+    {
+        List<Customer> customerList = customerInfoService.findCustomerByname(customerName);
+        ResponseBean responseBean=new ResponseBean(true,customerList);
+        return  responseBean;
+    }
+    @RequestMapping(value = "findCustomerOne" , method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public  ResponseBean findCustomerOne(@RequestParam String customerName,String phoneNumber, HttpServletRequest request, HttpServletResponse response)
+    {
+        Customer customer = customerInfoService.findCustomerOne(customerName,phoneNumber);
+        ResponseBean responseBean=new ResponseBean(true,customer);
+        return  responseBean;
+    }
+    @RequestMapping(value = "totalCustomer", method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public int totalCustomer()
+    {
+        return customerInfoService.totalCustomer();
     }
 }

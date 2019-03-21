@@ -1,19 +1,17 @@
 package com.dhu.love.manage.mapper;
 
 import com.dhu.love.grade.model.Customer;
-import com.dhu.love.manage.entity.CustomerInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface CustomerInfoMapper {
-    int addCustomerInfo(CustomerInfo customerInfo);
-    int updateCustomerInfo(CustomerInfo customerInfo);
-    int deleteCustomerInfo(int customer_id);
-    Map findCustomerByname(String customer_name);
-    CustomerInfo findCustomerOne(String customer_name, String phone_number);
+    int addCustomerInfo(Customer customer);
+    int updateCustomerInfo(Customer customer);
+    int deleteCustomerInfo(int customeId);
+    List<Customer> findCustomerByname(String customerName);
+    Customer findCustomerOne(String customerName, String phoneNumber);
     List<Customer> findCustomerAll();
     int totalCustomer();
 }

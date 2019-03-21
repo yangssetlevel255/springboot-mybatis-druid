@@ -2,7 +2,6 @@ package com.dhu.love.manage.service.imp;
 
 import com.dhu.love.grade.model.Customer;
 import com.dhu.love.manage.dao.CustomerInfoDao;
-import com.dhu.love.manage.entity.CustomerInfo;
 import com.dhu.love.manage.service.CustomerInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +15,12 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
     @Autowired
     CustomerInfoDao customerInfoDao;
     @Override
-    public int addCustomer(CustomerInfo customerInfo) {
+    public int addCustomer(Customer customer) {
         return 0;
     }
 
     @Override
-    public int updateCustomer(CustomerInfo customerInfo) {
+    public int updateCustomer(Customer customer) {
         return 0;
     }
 
@@ -31,12 +30,12 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
     }
 
     @Override
-    public Map findCustomerByname(String customer_name) {
+    public List<Customer> findCustomerByname(String customer_name) {
         return null;
     }
 
     @Override
-    public CustomerInfo findCustomerOne(String customer_name, String phone_number) {
+    public Customer findCustomerOne(String customer_name, String phone_number) {
         return null;
     }
 

@@ -4,26 +4,32 @@
 <mapper namespace="com.dhu.love.manage.mapper.DatemanagerMapper">
 
     <!-- 新增记录 -->
-    <insert id="addDate" useGeneratedKeys="true" keyProperty="mid" parameterType="com.dhu.love.manage.entity.Datemanager">
-        insert into table date_management(mmname,mmid,mfname,mfid,mmmobile,mfmobile
-        ,starttime,endtime,datestatus)
-        values(#{mmname},#{mmid},#{mfname},#{mfid},#{mmmobile},#{mfmobile}
-        ,#{starttime},#{endtime},#{datestatus});
+    <insert id="addDate" useGeneratedKeys="true" keyProperty="mid" parameterType="com.dhu.love.manage.entity.DateManager">
+        insert into table date_management(
+  mmname, mmid, mfname, mfid, mmmobile,
+  mfmobile, starttime, endtime, datestatus
+)
+values
+  (
+    #{mmName},#{mmId},#{mfName},#{mfId},#{mmMobile},#{mfMobile}
+    ,
+    #{startTime},#{endTime},#{dateStatus});
     </insert>
 
     <!-- 更新记录 -->
     <update id="updateDate" useGeneratedKeys="true" keyProperty="mid" parameterType="com.dhu.love.manage.entity.Datemanager">
-        update table date_management
-        set starttime=#{starttime},endtime=#{endtime},datestatus=#{datestatus}
-        where  mmid=#{mmid} and mmmobile=#{mmmobile} and mfid=#{mfid} and mfmobile=#{mfmobile};
+        update
+  table date_management
+set
+  starttime = #{startTime},endtime=#{endTime},datestatus=#{dateStatus}
+where
+  mmid = #{mmId} and mmmobile=#{mmMobile} and mfid=#{mfId} and mfmobile=#{mfMobile};
     </update>
 
     <!-- 更新用户表用户状态-->
     <update id="updateCustomer" parameterType="String">
         update table customer_info
-        set status = #{datestatus} where customer_id=#{mmid};
-        <!--update table customer_info
-        #set status = #{datestatus} where customer_id=#{mfid};-->
+        set status = #{dateStatus} where customer_id=#{mmid};
     </update>
 
     <!-- 删除记录 -->
@@ -31,17 +37,17 @@
         select * from date_management where mid=#{mid};
     </delete>
     <!-- 通过姓名查找记录 -->
-    <select id="findDateByname" resultType="java.util.Map" parameterType="String">
-        select * from date_management where mmname = #{mmname} or mfname=#{mmname};
+    <select id="findDateByName" resultType="com.dhu.love.manage.entity.DateManager" parameterType="String">
+        select * from date_management where mmname = #{name} or mfname=#{name};
     </select>
 
     <!-- 查找唯一记录-->
-    <select id="findDateOne" resultType="com.dhu.love.manage.entity.Datemanager" parameterType="com.dhu.love.manage.entity.Datemanager">
+    <select id="findDateOne" resultType="com.dhu.love.manage.entity.DateManager" parameterType="int">
         select * from date_management
         where mmid=#{mmid} and mfid=#{mfid};
     </select>
     <!-- 查找记录 -->
-    <select id="findDateAll" resultType="java.util.Map" >
+    <select id="findDateAll" resultType="com.dhu.love.manage.entity.DateManager" >
         select * from date_management;
     </select>
 
